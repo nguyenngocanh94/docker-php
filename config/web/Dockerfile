@@ -16,3 +16,5 @@ COPY v-host.conf /etc/httpd/conf.d/
 
 # create webserver-default directory
 RUN mkdir -p /var/www/dev.na/public
+
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]

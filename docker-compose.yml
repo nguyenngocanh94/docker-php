@@ -1,0 +1,49 @@
+version: '3'
+
+networks:
+  pb101:
+
+services: 
+  mysql:
+    image: mysql:5.5.60
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "13306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: nlp_staging
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      - pb101
+
+  web:
+    build:
+      context: ./config/web
+    container_name: web
+    volumes:
+      - ./src/www_fit-ence_develop:/var/www/dev.na
+    ports:
+      - "443:443"
+      - "80:80"
+    tty: true  
+    networks:
+      - pb101  
+
+  api:
+    build:
+      context: ./config/api
+      dockerfile: Dockerfile
+    container_name: api
+    volumes:
+      - ./src/api_fit-ence_develop:/var/www/api.na
+    ports:
+      - "8080:80"
+    tty: true  
+    networks:
+      - pb101    

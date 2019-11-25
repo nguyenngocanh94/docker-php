@@ -10,14 +10,11 @@ services:
     tty: true
     ports:
       - "13306:3306"
-    volumes:
-      - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: nlp_staging
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      SERVICE_TAGS: dev
+      MYSQL_DATABASE: 'nlp_staging'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
       SERVICE_NAME: mysql
     networks:
       - pb101

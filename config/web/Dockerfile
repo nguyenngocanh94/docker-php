@@ -13,8 +13,13 @@ RUN yum -y install php72 php72-php php72-php-opcache php72-php-bcmath php72-php-
 RUN yum -y install httpd mod_ssl
 
 COPY v-host.conf /etc/httpd/conf.d/
-
 # create webserver-default directory
-RUN mkdir -p /var/www/dev.na/public
+RUN mkdir -p /var/www/dev.na
+RUN mkdir -p /var/www/cert
+COPY cert/server.crt /var/www/cert
+COPY cert/server.key /var/www/cert
+
+COPY cert/server.csr /var/www/cert
+
 
 CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]

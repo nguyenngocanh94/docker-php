@@ -8,6 +8,8 @@ services:
     image: mysql:5.5.60
     restart: unless-stopped
     tty: true
+    volumes:
+      - ./mysql:/var/lib/mysql
     ports:
       - "13306:3306"
     environment:
